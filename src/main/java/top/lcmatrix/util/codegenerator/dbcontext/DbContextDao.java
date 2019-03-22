@@ -38,8 +38,12 @@ public class DbContextDao{
 		Platform platform = PlatformFactory.createNewPlatformInstance(dbName);
 		Connection connection = null;
 		try {
+			String password = inputBean.getPassword();
+			if("".equals(password)) {
+				password = null;
+			}
 			connection = DriverManager.getConnection(inputBean.getJdbcUrl(),
-					inputBean.getUserName(), inputBean.getPassword());
+					inputBean.getUserName(), password);
 			database = platform.readModelFromDatabase(connection, null);
 			allTables = database.getTables();
 		} catch (SQLException e) {

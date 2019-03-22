@@ -138,7 +138,14 @@ public class MainWindow extends JFrame{
 			public void run() {
 				try {
 					ContextServiceFactory.create(ContextServiceFactory.CONTEXT_TYPE_DB).generate(inputBean);
-					JOptionPane.showMessageDialog(MainWindow.this, "Generate finish!");
+					int toOpen = JOptionPane.showConfirmDialog(MainWindow.this, "Generate finish!\nOpen the output dir now?", "", JOptionPane.YES_NO_OPTION);
+					if(toOpen == JOptionPane.YES_OPTION) {
+						try {
+							Desktop.getDesktop().open(new File(inputBean.getOutputDir()));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 				} catch (GenerateException e1) {
 					JOptionPane.showMessageDialog(MainWindow.this, e1.getMessage());
 				}
