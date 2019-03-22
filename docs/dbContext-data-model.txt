@@ -1,0 +1,45 @@
+(dbContext)
+|
+|- globalsettings
+|	|
+|	|- packageName		生成代码的包名
+|	|- ...				其他自定义配置，如globalsettings.jsPath...
+|
+|- entity
+|	|
+|	|- name				表名
+|	|- description		表注释
+|	|- entityName		表名对应的实体名（驼峰命名，首字母小写）
+|	|- className		表名对应的类名（驼峰命名，首字母大写）
+|	|- fields			包含的字段
+|		|
+|		|- fields[0]	第一个字段
+|			|
+|			|- name				对应表的列名
+|			|- primaryKey		是否主键
+|			|- required			是否必须
+|			|- length			长度
+|			|- description		字段注释
+|			|- defaultValue		默认值
+|			|- autoIncrement	是否是自增列
+|			|- fieldName		字段名（驼峰命名，首字母小写）
+|			|- fieldType		字段的java类型
+|				|
+|				|- canonicalName	类型全名，如java.lang.String,java.lang.String[]等
+|				|- simpleName		类型简名，如String,String[]等
+|				|- baseName			类型基本名，若非java基本类型，则与simpleName相同，如int,long,String等
+|			|- enums			可选值，当字段的注释中包含像"value:text"这样的表达式时，这部分将被解析为可选值
+|				|
+|				|- enums[0]
+|					|
+|					|- text		显示名称
+|					|- value	值
+|				|- enums[1,2...]
+|			|- ofBinaryType			是否binary类型
+|			|- ofNumericType		是否数字型
+|			|- ofTextType			是否文本类型
+|			|- ofDateTimeType		是否日期时间类型
+|		|
+|		|- fields[1,2...]
+|	|
+|	|- primaryFields	主键字段集合，模型同fields
