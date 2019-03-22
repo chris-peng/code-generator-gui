@@ -15,10 +15,10 @@
 
 #### 使用指南：
 1. 设置好各个选项，注意：MySql的连接串建议加上useInformationSchema=true选项，以读取表注释：
-![选项](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/help1.png)
+![选项](https://chris-peng.github.io/code-generator-gui/imgs/help1.png)
 2. 点击"GENERATE"按钮生成代码：
-![生成](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/help2.png)
+![生成](https://chris-peng.github.io/code-generator-gui/imgs/help2.png)
 
 
 #### 模板和生成的代码比较：
-![生成](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/tplANDcode.png)
+![生成](https://chris-peng.github.io/code-generator-gui/imgs/tplANDcode.png)
