@@ -14,3 +14,11 @@
     如你所见，文件名也可以是模板。
 
 #### 使用指南：
+1. 设置好各个选项，注意：MySql的连接串建议加上useInformationSchema=true选项，以读取表注释：
+![选项](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/help1.png)
+2. 点击"GENERATE"按钮生成代码：
+![生成](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/help2.png)
+
+
+#### 模板和生成的代码比较：
+![生成](https://github.com/chris-peng/code-generator-gui/blob/master/docs/imgs/tplANDcode.png)
