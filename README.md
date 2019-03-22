@@ -5,7 +5,7 @@
 
 1. 通过读取数据库表（MySql）结构，根据提供的模板生成代码，如java MVC各层增删查改代码、前端数据维护页面代码、Mybatis的mapper.xml映射文件，等等。
 2. 可扩展支持其他数据库或其他数据结构源。
-3. 仅支持freemarker模板，模板文件名需以.ftl结尾，目前支持的模板变量：https://chris-peng.github.io/code-generator-gui/dbContext-data-model.txt。
+3. 仅支持freemarker模板，模板文件名需以.ftl结尾，目前支持的模板变量：https://chris-peng.github.io/code-generator-gui/dbContext-data-model.txt 。
 
     这里是2个模板的例子：
     * [${entity.className}.java.ftl](https://github.com/chris-peng/code-generator-gui/blob/master/docs/testTpl/%24%7Bentity.className%7D.java.ftl)
