@@ -26,7 +26,7 @@ public class LinkLabel extends JLabel {
 		super("<html>" + vText + "</html>");
 		this.text = vText;
 		try {
-			if (!vLink.startsWith("http://"))
+			if (!vLink.startsWith("http://") && !vLink.startsWith("https://"))
 				vLink = "http://" + vLink;
 			this.link = new URL(vLink);
 		} catch (MalformedURLException err) {
