@@ -210,7 +210,7 @@ public class MainWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Desktop.getDesktop().browse(new URL("https://github.com/chris-peng/nInARow-react/").toURI());
+					Desktop.getDesktop().browse(new URL("https://github.com/chris-peng/code-generator-gui").toURI());
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {

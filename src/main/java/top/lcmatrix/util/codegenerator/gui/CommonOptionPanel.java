@@ -35,7 +35,7 @@ public class CommonOptionPanel extends JPanel{
 		templatePanel.setLayout(templatePanelLayout);
 		JPanel templateLabelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
 		templateLabelPanel.add(new JLabel("template dir (Freemarker File with .ftl suffix supported."));
-		LinkLabel variableLinkLabel = new LinkLabel(" View template variables supported) *:", "http://www.baidu.com");
+		LinkLabel variableLinkLabel = new LinkLabel(" View template variables supported) *:", "https://chris-peng.github.io/code-generator-gui/dbContext-data-model.txt");
 		variableLinkLabel.setForeground(Color.red);
 		templateLabelPanel.add(variableLinkLabel);
 		templatePanel.add(templateLabelPanel);
