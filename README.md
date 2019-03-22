@@ -11,7 +11,7 @@
     * [${entity.className}.java.ftl](https://github.com/chris-peng/code-generator-gui/blob/master/docs/testTpl/%24%7Bentity.className%7D.java.ftl)
     * [${entity.className}.java.ftl](https://github.com/chris-peng/code-generator-gui/blob/master/docs/testTpl/%24%7Bentity.className%7D.java.ftl)
     
-    如你所见，文件名也可以是模板。
+    如你所见，文件名也可以是模板。生成的代码文件名将在应用模板后自动去除ftl后缀。
 
 #### 使用指南：
 1. 设置好各个选项，注意：MySql的连接串建议加上useInformationSchema=true选项，以读取表注释：
