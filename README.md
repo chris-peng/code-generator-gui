@@ -20,5 +20,5 @@
 ![生成](https://chris-peng.github.io/code-generator-gui/imgs/help2.png)
 
 
-#### 模板和生成的代码比较：
+#### 模板和生成的代码：
 ![生成](https://chris-peng.github.io/code-generator-gui/imgs/tplANDcode.png)
