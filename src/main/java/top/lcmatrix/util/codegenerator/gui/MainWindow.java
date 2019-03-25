@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.PopupMenu;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -15,6 +17,9 @@ import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -64,7 +69,7 @@ public class MainWindow extends JFrame{
 	private void initMyself() {
 		this.setTitle("LcMatrix code generator " + Constants.VERSION);
 //		this.setVisible(true);
-		this.setSize((int)(screenSize.width * 0.5), (int)(screenSize.height * 0.6));
+		this.setSize((int)(screenSize.width * 0.5), (int)(screenSize.height * 0.7));
 		this.setLocation((int)(screenSize.width * 0.25), (int)(screenSize.height * 0.15));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -74,7 +79,7 @@ public class MainWindow extends JFrame{
 		contentPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.8), (int)(getHeight() * 1.3)));
 		JScrollPane jScrollPane = new JScrollPane(contentPanel);
 		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jScrollPane.setPreferredSize(new Dimension((int)(getWidth() - 20), (int)(getHeight() * 0.85)));
+		jScrollPane.setPreferredSize(new Dimension((int)(getWidth() - 20), (int)(getHeight() * 0.84)));
 		this.getContentPane().add(jScrollPane);
 	}
 	
@@ -84,7 +89,8 @@ public class MainWindow extends JFrame{
 		initExtraOptionPanel();
 		addOtherComponent();
 		initGenerateButton();
-		readDefaultInputBean();
+		readConfigurations("default");
+		initMenu();
 	}
 
 	private void initCommonOptionPanel() {
@@ -123,7 +129,7 @@ public class MainWindow extends JFrame{
 				generating = true;
 				changeGBtnStatus();
 				
-				saveInputBean(inputBean);
+				saveConfigurations(inputBean, "default");
 				
 				doGenerateInBackground(inputBean);
 			}
@@ -178,10 +184,10 @@ public class MainWindow extends JFrame{
 		return inputBean;
 	}
 	
-	private void saveInputBean(InputBean inputBean) {
+	private void saveConfigurations(InputBean inputBean, String name) {
 		String ibJson = JSON.toJSONString(inputBean);
 		File jarDir = PathUtil.getJarDir();
-		File defaultJson = new File(jarDir.getAbsoluteFile() + File.separator + "default.json");
+		File defaultJson = new File(jarDir.getAbsoluteFile() + File.separator + name + ".json");
 		try {
 			FileUtils.write(defaultJson, ibJson, Constants.DEFAULT_CHARSET, false);
 		} catch (IOException e) {
@@ -189,10 +195,10 @@ public class MainWindow extends JFrame{
 		}
 	}
 	
-	private void readDefaultInputBean() {
+	private void readConfigurations(String configName) {
 		File jarDir = PathUtil.getJarDir();
 		try {
-			String ibJson = FileUtils.readFileToString(new File(jarDir.getAbsoluteFile() + File.separator + "default.json"), Constants.DEFAULT_CHARSET);
+			String ibJson = FileUtils.readFileToString(new File(jarDir.getAbsoluteFile() + File.separator + configName + ".json"), Constants.DEFAULT_CHARSET);
 			InputBean inputBean = JSON.parseObject(ibJson, InputBean.class);
 			commonOptionPanel.setTemplateDir(inputBean.getTemplateDir());
 			commonOptionPanel.setOutputDir(inputBean.getOutputDir());
@@ -229,5 +235,55 @@ public class MainWindow extends JFrame{
 		});
 		panel.add(githubBtn);
 		contentPanel.add(panel);
+	}
+	
+	private JMenu fileMenu;
+	private void initMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		fileMenu = new JMenu("File");
+		fileMenu.add(createSaveConfigMenuItem());
+		fileMenu.add(createLoadConfigMenuItem());
+		
+		menuBar.add(fileMenu);
+		this.setJMenuBar(menuBar);
+	}
+	
+	private JMenuItem createSaveConfigMenuItem() {
+		JMenuItem saveConfigMenuItem = new JMenuItem("Save Configurations...");
+		saveConfigMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String configName = JOptionPane.showInputDialog("Enter the name of configurations:");
+				saveConfigurations(assembleInputBean(), configName);
+				//reload load configuration menu
+				fileMenu.remove(1);
+				fileMenu.add(createLoadConfigMenuItem());
+			}
+		});
+		return saveConfigMenuItem;
+	}
+	
+	private JMenuItem createLoadConfigMenuItem() {
+		JMenu loadConfigMenu = new JMenu("Load Configurations");
+		File jarDir = PathUtil.getJarDir();
+		File[] configFiles = jarDir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.isFile() && pathname.getName().endsWith(".json");
+			}
+		});
+		for(File f : configFiles) {
+			JMenuItem configFileMenuItem = new JMenuItem(f.getName());
+			configFileMenuItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String fileName = ((JMenuItem)e.getSource()).getText();
+					readConfigurations(fileName.substring(0, fileName.lastIndexOf(".json")));
+				}
+			});
+			loadConfigMenu.add(configFileMenuItem);
+		}
+		return loadConfigMenu;
 	}
 }
