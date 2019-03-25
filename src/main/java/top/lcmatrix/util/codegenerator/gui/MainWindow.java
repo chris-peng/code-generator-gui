@@ -79,7 +79,7 @@ public class MainWindow extends JFrame{
 		contentPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.8), (int)(getHeight() * 1.3)));
 		JScrollPane jScrollPane = new JScrollPane(contentPanel);
 		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jScrollPane.setPreferredSize(new Dimension((int)(getWidth() - 20), (int)(getHeight() * 0.84)));
+		jScrollPane.setPreferredSize(new Dimension((int)(getWidth() - 20), (int)(getHeight() * 0.83)));
 		this.getContentPane().add(jScrollPane);
 	}
 	
