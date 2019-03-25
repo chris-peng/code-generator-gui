@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.PopupMenu;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -255,6 +254,9 @@ public class MainWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String configName = JOptionPane.showInputDialog("Enter the name of configurations:");
+				if(configName == null) {
+					return;
+				}
 				saveConfigurations(assembleInputBean(), configName);
 				//reload load configuration menu
 				fileMenu.remove(1);
