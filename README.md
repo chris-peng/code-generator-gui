@@ -17,7 +17,6 @@
     * MaxDB
     * Firebird
     * Cloudscape
-    * DB2v8
     * Sybase
     * DB2
     * Axion
