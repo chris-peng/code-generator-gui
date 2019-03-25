@@ -12,7 +12,6 @@
     * HsqlDb
     * McKoi
     * Derby
-    * MySQL5
     * PostgreSql
     * Interbase
     * MaxDB
