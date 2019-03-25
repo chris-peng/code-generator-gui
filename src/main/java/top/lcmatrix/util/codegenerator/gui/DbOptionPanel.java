@@ -1,10 +1,13 @@
 package top.lcmatrix.util.codegenerator.gui;
 
 import java.awt.GridLayout;
+import java.io.File;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
+import top.lcmatrix.util.codegenerator.gui.base.FileInput;
 import top.lcmatrix.util.codegenerator.gui.base.FormItemPanel;
 
 public class DbOptionPanel extends JPanel{
@@ -14,6 +17,7 @@ public class DbOptionPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private FileInput cJdbcDriverJar = new FileInput();
 	private JTextField cJdbcUrl = new JTextField();
 	private JTextField cUserName = new JTextField();
 	private JTextField cPassword = new JTextField();
@@ -22,13 +26,35 @@ public class DbOptionPanel extends JPanel{
 	public DbOptionPanel() {
 		super();
 		this.setLayout(new GridLayout(0, 1));
-		this.add(new FormItemPanel("jdbc url ( Currently only support Mysql ) *:", cJdbcUrl));
+		cJdbcDriverJar.setPrompt("MySql");
+		cJdbcDriverJar.setFileFilter(new FileFilter() {
+			
+			@Override
+			public String getDescription() {
+				return "jar file filter";
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				return (f.isFile() && f.getName().endsWith(".jar")) || f.isDirectory();
+			}
+		});
+		this.add(new FormItemPanel("jdbc driver jar ( Mysql is built-in supported,just leave it empty when using Mysql):", cJdbcDriverJar));
+		this.add(new FormItemPanel("jdbc url *:", cJdbcUrl));
 		this.add(new FormItemPanel("db user name *:", cUserName));
 		this.add(new FormItemPanel("db password:", cPassword));
 		this.add(new FormItemPanel("table name ( * denotes any character ) *:", cTableName));
 	}
+	
+	public String getJdbcDriverJar() {
+		return cJdbcDriverJar.getValue();
+	}
 
-	public String getcJdbcUrl() {
+	public void setJdbcDriverJar(String jdbcDriverJar) {
+		this.cJdbcDriverJar.setValue(jdbcDriverJar);
+	}
+
+	public String getJdbcUrl() {
 		return cJdbcUrl.getText();
 	}
 

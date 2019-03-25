@@ -13,14 +13,8 @@ public class Globalsettings extends HashMap<String, Object>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String SETTING_PACKAGE_NAME = "packageName";
-	
 	public static final String EXP_SPLIT_TOKEN = ";";
 	public static final String EXP_ASSIGN_TOKEN = "=";
-
-	public String getPackageName() {
-		return (String) get(SETTING_PACKAGE_NAME);
-	}
 
 	public static Globalsettings fromSettingsExp(String exp) {
 		Globalsettings g = new Globalsettings();

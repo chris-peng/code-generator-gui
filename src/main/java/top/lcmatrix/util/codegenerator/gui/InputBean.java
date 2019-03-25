@@ -7,9 +7,9 @@ import top.lcmatrix.util.codegenerator.util.Assert.AssertFailException;
 
 public class InputBean {
 
-	private String packageName;
 	private String templateDir;
 	private String outputDir;
+	private String jdbcDriverJar;
 	private String jdbcUrl;
 	private String userName;
 	private String password;
@@ -17,7 +17,6 @@ public class InputBean {
 	private String globalSettings;
 	
 	public void validate() throws AssertFailException {
-		Assert.assertTrue("package name can not be blank", StringUtils.isNotBlank(packageName));
 		Assert.assertTrue("template dir can not be blank", StringUtils.isNotBlank(templateDir));
 		Assert.assertTrue("output dir can not be blank", StringUtils.isNotBlank(outputDir));
 		Assert.assertTrue("jdbc url can not be blank", StringUtils.isNotBlank(jdbcUrl));
@@ -25,12 +24,6 @@ public class InputBean {
 		Assert.assertTrue("table name can not be blank", StringUtils.isNotBlank(tableName));
 	}
 	
-	public String getPackageName() {
-		return packageName;
-	}
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
 	public String getTemplateDir() {
 		return templateDir;
 	}
@@ -72,6 +65,14 @@ public class InputBean {
 	}
 	public void setGlobalSettings(String globalSettings) {
 		this.globalSettings = globalSettings;
+	}
+
+	public String getJdbcDriverJar() {
+		return jdbcDriverJar;
+	}
+
+	public void setJdbcDriverJar(String jdbcDriverJar) {
+		this.jdbcDriverJar = jdbcDriverJar;
 	}
 	
 }

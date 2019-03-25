@@ -8,7 +8,6 @@ import java.awt.LayoutManager;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import top.lcmatrix.util.codegenerator.gui.base.FileInput;
 import top.lcmatrix.util.codegenerator.gui.base.FormItemPanel;
@@ -21,14 +20,12 @@ public class CommonOptionPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField cPackageName = new JTextField();
 	private FileInput cTemplateDir = new FileInput();
 	private FileInput cOutputDir = new FileInput();
 
 	public CommonOptionPanel() {
 		super();
 		this.setLayout(new GridLayout(0, 1));
-		this.add(new FormItemPanel("package name *:", cPackageName));
 		cTemplateDir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		JPanel templatePanel = new JPanel();
 		LayoutManager templatePanelLayout = new GridLayout(0, 1);
@@ -46,14 +43,6 @@ public class CommonOptionPanel extends JPanel{
 		this.add(new FormItemPanel("output dir *:", cOutputDir));
 	}
 	
-	public String getPackageName() {
-		return cPackageName.getText();
-	}
-	
-	public void setPackageName(String packageName) {
-		cPackageName.setText(packageName);
-	}
-
 	public String getTemplateDir() {
 		return cTemplateDir.getValue();
 	}

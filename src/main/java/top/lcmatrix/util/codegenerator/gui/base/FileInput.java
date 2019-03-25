@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
+import org.jdesktop.swingx.prompt.PromptSupport;
+
 public class FileInput extends JPanel{
 
 	/**
@@ -87,5 +89,9 @@ public class FileInput extends JPanel{
 	
 	public void setValue(String text) {
 		pathField.setText(text);
+	}
+	
+	public void setPrompt(String prompt) {
+		PromptSupport.setPrompt(prompt, pathField);
 	}
 }

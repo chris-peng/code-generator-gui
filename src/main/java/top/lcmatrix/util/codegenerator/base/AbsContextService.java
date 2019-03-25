@@ -3,8 +3,6 @@ package top.lcmatrix.util.codegenerator.base;
 import java.io.File;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import top.lcmatrix.util.codegenerator.gui.InputBean;
 import top.lcmatrix.util.codegenerator.template.TemplateLoader;
 import top.lcmatrix.util.codegenerator.template.TemplateProcessor;
@@ -18,7 +16,7 @@ public abstract class AbsContextService {
 		List<TemplateStruct> templates = TemplateLoader.loadTemplates(inputBean.getTemplateDir());
 		List<IContext> contexts = getContexts(inputBean);
 		for(IContext context : contexts) {
-			String storeDir = getOutputDir(inputBean.getOutputDir(), context.getName(), inputBean.getPackageName());
+			String storeDir = getOutputDir(inputBean.getOutputDir(), context.getName());
 			File fStoreDir = new File(storeDir);
 			fStoreDir.mkdirs();
 			for(TemplateStruct ts : templates){
@@ -27,11 +25,8 @@ public abstract class AbsContextService {
 		}
 	}
 	
-	private String getOutputDir(String baseDir, String contextName, String packageName){
-		if(StringUtils.isBlank(packageName)){
-			packageName = "generated_code";
-		}
-		String mdir = baseDir + File.separator + packageName + "_" + contextName;
+	private String getOutputDir(String baseDir, String contextName){
+		String mdir = baseDir + File.separator + contextName;
 		String dir = mdir + "";
 		int i = 1;
 		while(new File(dir).exists()){

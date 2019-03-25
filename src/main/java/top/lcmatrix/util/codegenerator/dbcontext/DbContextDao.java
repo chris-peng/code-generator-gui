@@ -15,6 +15,7 @@ import org.apache.ddlutils.model.Table;
 
 import top.lcmatrix.util.codegenerator.base.GenerateException;
 import top.lcmatrix.util.codegenerator.dbcontext.dbsupport.IDbSupport;
+import top.lcmatrix.util.codegenerator.dbcontext.dbsupport.OtherDbSupport;
 import top.lcmatrix.util.codegenerator.gui.InputBean;
 import top.lcmatrix.util.codegenerator.util.AsteriskExp;
 
@@ -29,7 +30,7 @@ public class DbContextDao{
 		if(StringUtils.isBlank(dbName)) {
 			throw new GenerateException("Incorrect or unsupported jdbc url!");
 		}
-		dbSupport = getDbSupport(dbName);
+		dbSupport = getDbSupport(dbName, inputBean.getJdbcDriverJar());
 		try {
 			dbSupport.loadDriver();
 		} catch (ClassNotFoundException e1) {
@@ -70,12 +71,15 @@ public class DbContextDao{
 		return tables;
 	}
 	
-	private IDbSupport getDbSupport(String dbName) {
+	private IDbSupport getDbSupport(String dbName, String driverJar) {
 		try {
 			Class<?> dbSupportClass = Class.forName("top.lcmatrix.util.codegenerator.dbcontext.dbsupport." + dbName);
 			return (IDbSupport) dbSupportClass.newInstance();
 		} catch (ClassNotFoundException e) {
-			throw new GenerateException("This database is not supported for the time being!");
+			if(StringUtils.isBlank(driverJar)) {
+				throw new GenerateException("jdbc driver jar must not be empty.");
+			}
+			return new OtherDbSupport(dbName, driverJar);
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new GenerateException("Incorrect Implementation of db support class!");
 		}

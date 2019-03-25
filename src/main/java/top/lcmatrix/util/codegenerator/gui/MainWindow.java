@@ -62,7 +62,7 @@ public class MainWindow extends JFrame{
 	}
 	
 	private void initMyself() {
-		this.setTitle("LcMatrix code generator");
+		this.setTitle("LcMatrix code generator " + Constants.VERSION);
 //		this.setVisible(true);
 		this.setSize((int)(screenSize.width * 0.5), (int)(screenSize.height * 0.6));
 		this.setLocation((int)(screenSize.width * 0.25), (int)(screenSize.height * 0.15));
@@ -71,7 +71,7 @@ public class MainWindow extends JFrame{
 		this.setLayout(new FlowLayout());
 		contentPanel = new JPanel();
 		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.8), (int)(getHeight() * 1.5)));
+		contentPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.8), (int)(getHeight() * 1.3)));
 		JScrollPane jScrollPane = new JScrollPane(contentPanel);
 		jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		jScrollPane.setPreferredSize(new Dimension((int)(getWidth() - 20), (int)(getHeight() * 0.85)));
@@ -88,12 +88,12 @@ public class MainWindow extends JFrame{
 	}
 
 	private void initCommonOptionPanel() {
-		commonOptionPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.9), (int)(getHeight() * 0.3)));
+		commonOptionPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.9), (int)(getHeight() * 0.2)));
 		contentPanel.add(commonOptionPanel);
 	}
 
 	private void initDbOptionPanel() {
-		dbOptionPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.9), (int)(getHeight() * 0.4)));
+		dbOptionPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.9), (int)(getHeight() * 0.5)));
 		contentPanel.add(dbOptionPanel);
 	}
 
@@ -167,10 +167,10 @@ public class MainWindow extends JFrame{
 
 	private InputBean assembleInputBean() {
 		InputBean inputBean = new InputBean();
-		inputBean.setPackageName(commonOptionPanel.getPackageName());
 		inputBean.setTemplateDir(commonOptionPanel.getTemplateDir());
 		inputBean.setOutputDir(commonOptionPanel.getOutputDir());
-		inputBean.setJdbcUrl(dbOptionPanel.getcJdbcUrl());
+		inputBean.setJdbcDriverJar(dbOptionPanel.getJdbcDriverJar());
+		inputBean.setJdbcUrl(dbOptionPanel.getJdbcUrl());
 		inputBean.setUserName(dbOptionPanel.getUserName());
 		inputBean.setPassword(dbOptionPanel.getPassword());
 		inputBean.setTableName(dbOptionPanel.getTableName());
@@ -194,9 +194,9 @@ public class MainWindow extends JFrame{
 		try {
 			String ibJson = FileUtils.readFileToString(new File(jarDir.getAbsoluteFile() + File.separator + "default.json"), Constants.DEFAULT_CHARSET);
 			InputBean inputBean = JSON.parseObject(ibJson, InputBean.class);
-			commonOptionPanel.setPackageName(inputBean.getPackageName());
 			commonOptionPanel.setTemplateDir(inputBean.getTemplateDir());
 			commonOptionPanel.setOutputDir(inputBean.getOutputDir());
+			dbOptionPanel.setJdbcDriverJar(inputBean.getJdbcDriverJar());
 			dbOptionPanel.setJdbcUrl(inputBean.getJdbcUrl());
 			dbOptionPanel.setUserName(inputBean.getUserName());
 			dbOptionPanel.setPassword(inputBean.getPassword());

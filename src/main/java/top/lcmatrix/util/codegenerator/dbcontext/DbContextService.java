@@ -16,7 +16,6 @@ public class DbContextService extends AbsContextService{
 	@Override
 	public List<IContext> getContexts(InputBean inputBean) {
 		Globalsettings globalsettings = Globalsettings.fromSettingsExp(inputBean.getGlobalSettings());
-		globalsettings.put(Globalsettings.SETTING_PACKAGE_NAME, inputBean.getPackageName());
 		
 		DbContextDao tableMetaDataDao = new DbContextDao(inputBean);
 		List<Table> tableModels = tableMetaDataDao.getTableModels(inputBean.getTableName());
