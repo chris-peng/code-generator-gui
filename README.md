@@ -34,7 +34,7 @@
 ![选项](https://chris-peng.github.io/code-generator-gui/imgs/help1.png)
 2. 点击"GENERATE"按钮生成代码：
 ![生成](https://chris-peng.github.io/code-generator-gui/imgs/help2.png)
-补充，保存和加载配置：
+3. 可以把当前配置保存待用：
 ![配置](https://chris-peng.github.io/code-generator-gui/imgs/help3.png)
 
 
