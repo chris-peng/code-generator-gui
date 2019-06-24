@@ -26,7 +26,7 @@ public class DbOptionPanel extends JPanel{
 	public DbOptionPanel() {
 		super();
 		this.setLayout(new GridLayout(0, 1));
-		cJdbcDriverJar.setPrompt("MySql 8");
+		cJdbcDriverJar.setPrompt("MySql");
 		cJdbcDriverJar.setFileFilter(new FileFilter() {
 			
 			@Override
