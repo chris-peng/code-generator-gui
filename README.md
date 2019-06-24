@@ -1,7 +1,7 @@
 # code-generator-gui
 一个Java实现的基于freemarker模板的代码生成器
 
-#### 最新版本：[下载 v0.04](https://github.com/chris-peng/code-generator-gui/releases/download/0.0.4/code-generator-gui-0.0.4.jar)
+#### 最新版本：[下载 v0.05](https://github.com/chris-peng/code-generator-gui/releases/download/0.0.5/code-generator-gui-0.0.5.jar)
 
 1. 通过读取数据库表结构，根据提供的模板生成代码，如java MVC各层增删查改代码、前端数据维护页面代码、Mybatis的mapper.xml映射文件，等等。
 2. 可扩展支持其他数据库或其他数据结构源。已支持的数据库包括：
