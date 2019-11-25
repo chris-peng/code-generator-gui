@@ -3,7 +3,7 @@ package top.lcmatrix.util.codegenerator.dbcontext;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ddlutils.model.Table;
+import org.jumpmind.db.model.Table;
 
 import top.lcmatrix.util.codegenerator.base.AbsContextService;
 import top.lcmatrix.util.codegenerator.base.GenerateException;

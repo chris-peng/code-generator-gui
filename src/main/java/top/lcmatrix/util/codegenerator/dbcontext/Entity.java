@@ -3,9 +3,9 @@ package top.lcmatrix.util.codegenerator.dbcontext;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.WordUtils;
-import org.apache.ddlutils.model.Column;
-import org.apache.ddlutils.model.Table;
+import org.apache.commons.text.WordUtils;
+import org.jumpmind.db.model.Column;
+import org.jumpmind.db.model.Table;
 
 import top.lcmatrix.util.codegenerator.util.JdbcUtils;
 

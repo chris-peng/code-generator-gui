@@ -153,6 +153,9 @@ public class MainWindow extends JFrame{
 					}
 				} catch (GenerateException e1) {
 					JOptionPane.showMessageDialog(MainWindow.this, e1.getMessage());
+				} catch (Exception e) {
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(MainWindow.this, e.getMessage());
 				}
 				generating = false;
 				changeGBtnStatus();

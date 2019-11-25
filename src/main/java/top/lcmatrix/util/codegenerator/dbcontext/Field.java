@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ddlutils.model.Column;
-import org.apache.ddlutils.model.TypeMap;
+import org.apache.commons.text.WordUtils;
+import org.jumpmind.db.model.Column;
+import org.jumpmind.db.model.TypeMap;
 
 import top.lcmatrix.util.codegenerator.util.JdbcUtils;
 import top.lcmatrix.util.codegenerator.util.SqlJavaTypeConvertor;
@@ -33,16 +33,16 @@ public class Field extends Column{
 		this.setScale(column.getScale());
 		this.setSize(column.getSize());
 		this.setLength(column.getSizeAsInt());
-		this.setType(column.getType());
-		this.setTypeCode(column.getTypeCode());
+		this.setJdbcTypeName(column.getJdbcTypeName());
+		this.setJdbcTypeCode(column.getJdbcTypeCode());
 		this.setOfBinaryType(column.isOfBinaryType());
 		this.setOfNumericType(column.isOfNumericType());
 		this.setOfTextType(column.isOfTextType());
-		this.setOfDateTimeType(TypeMap.isDateTimeType(column.getTypeCode()));
+		this.setOfDateTimeType(TypeMap.isDateTimeType(column.getJdbcTypeCode()));
 		
 		//处理其他字段
 		this.setFieldName(WordUtils.uncapitalize(JdbcUtils.convertUnderscoreNameToPropertyName(column.getName())));
-		this.setFieldType(FieldType.fromClass(SqlJavaTypeConvertor.toJavaType(column.getTypeCode())));
+		this.setFieldType(FieldType.fromClass(SqlJavaTypeConvertor.toJavaType(column.getJdbcTypeCode())));
 		//可选值
 		parseComment2Enums();
 	}
