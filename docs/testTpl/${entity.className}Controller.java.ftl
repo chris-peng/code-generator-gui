@@ -31,7 +31,6 @@ import ${globalsettings.packageName}.webutil.response.ResponseException;
 
 <#assign entityComplex = entity.entityName + "s">
 <#if entity.entityName?ends_with("a") ||
-	entity.entityName?ends_with("e") ||
 	entity.entityName?ends_with("i") ||
 	entity.entityName?ends_with("o") ||
 	entity.entityName?ends_with("u") ||
