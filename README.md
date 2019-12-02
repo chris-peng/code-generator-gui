@@ -1,5 +1,5 @@
 # code-generator-gui
-一个Java实现的基于freemarker模板的代码生成器
+一个带GUI基于freemarker模板的代码生成器
 
 #### 最新版本：[下载 v0.1.0](https://github.com/chris-peng/code-generator-gui/releases/download/0.1.0/code-generator-gui-0.1.0.jar)
 
