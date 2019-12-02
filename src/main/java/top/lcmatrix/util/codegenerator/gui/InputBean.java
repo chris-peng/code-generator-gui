@@ -15,6 +15,7 @@ public class InputBean {
 	private String password;
 	private String tableName;
 	private String globalSettings;
+	private boolean outputToTableNameDir;
 	
 	public void validate() throws AssertFailException {
 		Assert.assertTrue("template dir can not be blank", StringUtils.isNotBlank(templateDir));
@@ -74,5 +75,12 @@ public class InputBean {
 	public void setJdbcDriverJar(String jdbcDriverJar) {
 		this.jdbcDriverJar = jdbcDriverJar;
 	}
-	
+
+	public boolean isOutputToTableNameDir() {
+		return outputToTableNameDir;
+	}
+
+	public void setOutputToTableNameDir(boolean outputToTableNameDir) {
+		this.outputToTableNameDir = outputToTableNameDir;
+	}
 }

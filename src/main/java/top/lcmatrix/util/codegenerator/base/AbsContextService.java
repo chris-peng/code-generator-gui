@@ -3,10 +3,13 @@ package top.lcmatrix.util.codegenerator.base;
 import java.io.File;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import top.lcmatrix.util.codegenerator.gui.InputBean;
 import top.lcmatrix.util.codegenerator.template.TemplateLoader;
 import top.lcmatrix.util.codegenerator.template.TemplateProcessor;
 import top.lcmatrix.util.codegenerator.template.TemplateStruct;
+import top.lcmatrix.util.codegenerator.util.PathUtil;
 
 public abstract class AbsContextService {
 	
@@ -15,24 +18,20 @@ public abstract class AbsContextService {
 	public void generate(InputBean inputBean) {
 		List<TemplateStruct> templates = TemplateLoader.loadTemplates(inputBean.getTemplateDir());
 		List<IContext> contexts = getContexts(inputBean);
+		String baseStoreDir = inputBean.getOutputDir();
+		new File(baseStoreDir).mkdirs();
 		for(IContext context : contexts) {
-			String storeDir = getOutputDir(inputBean.getOutputDir(), context.getName());
-			File fStoreDir = new File(storeDir);
-			fStoreDir.mkdirs();
+			String tableNameDir = null;
+			if(inputBean.isOutputToTableNameDir()){
+				String fileStoreDir = PathUtil.createNoRepeatPath(inputBean.getOutputDir(), context.getName());
+				new File(fileStoreDir).mkdirs();
+				tableNameDir = FilenameUtils.getBaseName(fileStoreDir);
+			}
 			for(TemplateStruct ts : templates){
-				TemplateProcessor.process(ts, context, storeDir);
+				String fileStoreDir = baseStoreDir + (tableNameDir != null ? (File.separator + tableNameDir) : "") + File.separator + ts.getRelativeDirPath();
+				new File(fileStoreDir).mkdirs();
+				TemplateProcessor.process(ts, context, fileStoreDir);
 			}
 		}
-	}
-	
-	private String getOutputDir(String baseDir, String contextName){
-		String mdir = baseDir + File.separator + contextName;
-		String dir = mdir + "";
-		int i = 1;
-		while(new File(dir).exists()){
-			dir = mdir + "_" + i;
-			i++;
-		}
-		return dir;
 	}
 }

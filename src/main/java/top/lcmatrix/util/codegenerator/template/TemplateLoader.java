@@ -1,10 +1,12 @@
 package top.lcmatrix.util.codegenerator.template;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -27,16 +29,21 @@ public class TemplateLoader {
 		configuration = new Configuration(Configuration.VERSION_2_3_28);
 		StringTemplateLoader stl = new StringTemplateLoader();
 		configuration.setTemplateLoader(stl);
+		Path templateDirPath = new File(templateDir).toPath();
 		try {
 			for(File templateFile : getTemplateFiles(templateDir)){
 				TemplateStruct ts = new TemplateStruct();
-				String contentTemplateId = templateFile.getAbsolutePath();
+				String contentTemplateId = UUID.randomUUID().toString();
 				stl.putTemplate(contentTemplateId, FileUtils.readFileToString(templateFile, Constants.DEFAULT_CHARSET));
 				ts.setContentTemplate(contentTemplateId);
 				
-				String fileNameTemplateId = templateFile.getAbsolutePath() + "!file_name";
+				String fileNameTemplateId = UUID.randomUUID().toString();
 				stl.putTemplate(fileNameTemplateId, FilenameUtils.getBaseName(templateFile.getAbsolutePath()));
 				ts.setFileNameTemplate(fileNameTemplateId);
+
+				String relativeFilePath = templateDirPath.relativize(templateFile.toPath()).toString();
+				String relativeDirPath = FilenameUtils.getPath(relativeFilePath);
+				ts.setRelativeDirPath(relativeDirPath);
 				
 				templates.add(ts);
 			}
@@ -50,17 +57,11 @@ public class TemplateLoader {
 		return configuration.getTemplate(name);
 	}
 
-	private static File[] getTemplateFiles(String sTemplateDir){
+	private static Collection<File> getTemplateFiles(String sTemplateDir){
 		File templateDir = new File(sTemplateDir);
 		if(!templateDir.exists() || !templateDir.isDirectory()) {
 			throw new GenerateException("Incorrect template dir");
 		}
-		return templateDir.listFiles(new FilenameFilter() {
-			
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(Constants.TPL_FILE_SUFFIX);
-			}
-		});
+		return FileUtils.listFiles(templateDir, new String[]{Constants.TPL_FILE_SUFFIX}, true);
 	}
 }

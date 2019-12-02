@@ -14,14 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import org.apache.commons.io.FileUtils;
 
@@ -51,6 +44,7 @@ public class MainWindow extends JFrame{
 	private JButton generateButton = new JButton("GENERATE");
 	private Color gBtnNormalBgColor = generateButton.getBackground();
 	private String gBtnNormalText = generateButton.getText();
+	private JCheckBox outputToTableNameDirBox = new JCheckBox("<html><body><p>output the files respectively to<br/>directories named by db table.</p></body></html>");
 	
 	public static MainWindow getInstance() {
 		if(mainWindow == null) {
@@ -87,6 +81,7 @@ public class MainWindow extends JFrame{
 		initDbOptionPanel();
 		initExtraOptionPanel();
 		addOtherComponent();
+		initOutputToTableDirBox();
 		initGenerateButton();
 		readConfigurations("default");
 		initMenu();
@@ -106,7 +101,11 @@ public class MainWindow extends JFrame{
 		extraOptionPanel.setPreferredSize(new Dimension((int)(getWidth() * 0.9), (int)(getHeight() * 0.1)));
 		contentPanel.add(extraOptionPanel);
 	}
-	
+
+	private void initOutputToTableDirBox(){
+		this.getContentPane().add(outputToTableNameDirBox);
+	}
+
 	private volatile boolean generating = false;
 	private void initGenerateButton() {
 		generateButton.setPreferredSize(new Dimension((int)(getWidth() * 0.5), (int)(getHeight() * 0.05)));
@@ -183,6 +182,7 @@ public class MainWindow extends JFrame{
 		inputBean.setPassword(dbOptionPanel.getPassword());
 		inputBean.setTableName(dbOptionPanel.getTableName());
 		inputBean.setGlobalSettings(extraOptionPanel.getGlobalSettings());
+		inputBean.setOutputToTableNameDir(outputToTableNameDirBox.isSelected());
 		return inputBean;
 	}
 	
@@ -210,6 +210,7 @@ public class MainWindow extends JFrame{
 			dbOptionPanel.setPassword(inputBean.getPassword());
 			dbOptionPanel.setTableName(inputBean.getTableName());
 			extraOptionPanel.setGlobalSettings(inputBean.getGlobalSettings());
+			outputToTableNameDirBox.setSelected(inputBean.isOutputToTableNameDir());
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ public class TemplateStruct {
 
 	private String contentTemplate;
 	private String fileNameTemplate;
+	private String relativeDirPath;
 	
 	public String getContentTemplate() {
 		return contentTemplate;
@@ -16,5 +17,13 @@ public class TemplateStruct {
 	}
 	public void setFileNameTemplate(String fileNameTemplate) {
 		this.fileNameTemplate = fileNameTemplate;
+	}
+
+	public String getRelativeDirPath() {
+		return relativeDirPath;
+	}
+
+	public void setRelativeDirPath(String relativeDirPath) {
+		this.relativeDirPath = relativeDirPath;
 	}
 }

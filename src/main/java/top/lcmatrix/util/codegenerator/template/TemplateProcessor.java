@@ -13,6 +13,7 @@ import freemarker.template.TemplateException;
 import top.lcmatrix.util.codegenerator.Constants;
 import top.lcmatrix.util.codegenerator.base.GenerateException;
 import top.lcmatrix.util.codegenerator.base.IContext;
+import top.lcmatrix.util.codegenerator.util.PathUtil;
 
 public class TemplateProcessor {
 
@@ -25,7 +26,8 @@ public class TemplateProcessor {
 			StringWriter stringWriter = new StringWriter();
 			fileNameTemplate.process(context, stringWriter);
 			String fileName = stringWriter.toString();
-			FileOutputStream fos = new FileOutputStream(storeDir + File.separator + fileName);
+			String filePath = PathUtil.createNoRepeatPath(storeDir, fileName);
+			FileOutputStream fos = new FileOutputStream(filePath);
 			out = new BufferedWriter(new OutputStreamWriter(fos, Constants.DEFAULT_CHARSET), 10240);
 			contentTemplate.process(context, out);
 		} catch (IOException | TemplateException e) {
