@@ -3,8 +3,7 @@ package top.lcmatrix.util.codegenerator.gui;
 import java.awt.GridLayout;
 import java.io.File;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
 import top.lcmatrix.util.codegenerator.gui.base.FileInput;
@@ -20,7 +19,7 @@ public class DbOptionPanel extends JPanel{
 	private FileInput cJdbcDriverJar = new FileInput();
 	private JTextField cJdbcUrl = new JTextField();
 	private JTextField cUserName = new JTextField();
-	private JTextField cPassword = new JTextField();
+	private JTextField cPassword = new JPasswordField();
 	private JTextField cTableName = new JTextField();
 
 	public DbOptionPanel() {

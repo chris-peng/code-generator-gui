@@ -14,9 +14,9 @@ import top.lcmatrix.util.codegenerator.util.JdbcUtils;
 import top.lcmatrix.util.codegenerator.util.SqlJavaTypeConvertor;
 
 public class Field extends Column{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -39,9 +39,13 @@ public class Field extends Column{
 		this.setOfNumericType(column.isOfNumericType());
 		this.setOfTextType(column.isOfTextType());
 		this.setOfDateTimeType(TypeMap.isDateTimeType(column.getJdbcTypeCode()));
-		
+
 		//处理其他字段
-		this.setFieldName(WordUtils.uncapitalize(JdbcUtils.convertUnderscoreNameToPropertyName(column.getName())));
+		if (column.getName().contains("_")) {
+			this.setFieldName(WordUtils.uncapitalize(JdbcUtils.convertUnderscoreNameToPropertyName(column.getName())));
+		} else {
+			this.setFieldName(WordUtils.uncapitalize(column.getName()));
+		}
 		this.setFieldType(FieldType.fromClass(SqlJavaTypeConvertor.toJavaType(column.getJdbcTypeCode())));
 		//可选值
 		parseComment2Enums();
@@ -58,7 +62,7 @@ public class Field extends Column{
 	private boolean ofTextType;
 	private boolean ofDateTimeType;
 	private int length;
-	
+
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -79,7 +83,7 @@ public class Field extends Column{
 	public void setFieldType(FieldType fieldType) {
 		this.fieldType = fieldType;
 	}
-	
+
 	private void parseComment2Enums(){
 		String comment = getDescription();
 		if(StringUtils.isBlank(comment)){
@@ -89,7 +93,7 @@ public class Field extends Column{
 		Matcher matcher = commentPattern.matcher(comment);
 		if(matcher.find()){
 			String enumStr = comment.substring(matcher.group(1).length());
-			
+
 			String[] enumExps = enumStr.split("[,，;；]");
 			List<ValueTextPair> enums = new ArrayList<ValueTextPair>();
 			for(String enumExp : enumExps){

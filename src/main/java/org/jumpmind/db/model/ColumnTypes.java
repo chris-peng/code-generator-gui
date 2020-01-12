@@ -39,6 +39,7 @@ final public class ColumnTypes {
     
     public static final int MSSQL_SQL_VARIANT = -150;
     public static final int MSSQL_NTEXT = -10;
+    public static final int MSSQL_DATETIMEOFFSET = -155;
     
     public static final int MAPPED_TIMESTAMPTZ = ORACLE_TIMESTAMPTZ;
     

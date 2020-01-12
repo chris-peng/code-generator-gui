@@ -1,5 +1,7 @@
 package top.lcmatrix.util.codegenerator.util;
 
+import org.jumpmind.db.model.ColumnTypes;
+
 import java.sql.Types;
 
 public class SqlJavaTypeConvertor {
@@ -24,6 +26,7 @@ public class SqlJavaTypeConvertor {
 		case Types.CHAR:
 		case Types.VARCHAR:
 		case Types.LONGVARCHAR:
+		case ColumnTypes.MSSQL_NTEXT:
 			result = String.class;
 			break;
 
@@ -68,15 +71,18 @@ public class SqlJavaTypeConvertor {
 			break;
 
 		case Types.DATE:
+		case Types.TIMESTAMP:
 			result = java.util.Date.class;
+			break;
+
+		case ColumnTypes.ORACLE_TIMESTAMPTZ:
+		case ColumnTypes.ORACLE_TIMESTAMPLTZ:
+		case ColumnTypes.MSSQL_DATETIMEOFFSET:
+			result = java.sql.Timestamp.class;
 			break;
 
 		case Types.TIME:
 			result = java.sql.Time.class;
-			break;
-
-		case Types.TIMESTAMP:
-			result = java.util.Date.class;
 			break;
 		}
 

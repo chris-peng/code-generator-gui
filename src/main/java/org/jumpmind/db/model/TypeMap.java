@@ -19,87 +19,87 @@ package org.jumpmind.db.model;
  * under the License.
  */
 
-import static org.jumpmind.db.model.ColumnTypes.ORACLE_TIMESTAMPLTZ;
-import static org.jumpmind.db.model.ColumnTypes.ORACLE_TIMESTAMPTZ;
+import org.apache.commons.lang3.StringUtils;
+import org.jumpmind.db.platform.PlatformUtils;
 
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jumpmind.db.platform.PlatformUtils;
+import static org.jumpmind.db.model.ColumnTypes.ORACLE_TIMESTAMPLTZ;
+import static org.jumpmind.db.model.ColumnTypes.ORACLE_TIMESTAMPTZ;
 
 /**
  * A class that maps SQL type names to their JDBC type ID found in
- * {@link java.sql.Types} and vice versa.
+ * {@link Types} and vice versa.
  */
 public abstract class TypeMap
 {
-    /** The string representation of the {@link java.sql.Types#ARRAY} constant. */
+    /** The string representation of the {@link Types#ARRAY} constant. */
     public static final String ARRAY         = "ARRAY";
-    /** The string representation of the {@link java.sql.Types#BIGINT} constant. */
+    /** The string representation of the {@link Types#BIGINT} constant. */
     public static final String BIGINT        = "BIGINT";
-    /** The string representation of the {@link java.sql.Types#BINARY} constant. */
+    /** The string representation of the {@link Types#BINARY} constant. */
     public static final String BINARY        = "BINARY";
-    /** The string representation of the {@link java.sql.Types#BIT} constant. */
+    /** The string representation of the {@link Types#BIT} constant. */
     public static final String BIT           = "BIT";
-    /** The string representation of the {@link java.sql.Types#BLOB} constant. */
+    /** The string representation of the {@link Types#BLOB} constant. */
     public static final String BLOB          = "BLOB";
-    /** The string representation of the {@link java.sql.Types#BOOLEAN} constant. */
+    /** The string representation of the {@link Types#BOOLEAN} constant. */
     public static final String BOOLEAN       = "BOOLEAN";
-    /** The string representation of the {@link java.sql.Types#CHAR} constant. */
+    /** The string representation of the {@link Types#CHAR} constant. */
     public static final String CHAR          = "CHAR";
-    /** The string representation of the {@link java.sql.Types#CLOB} constant. */
+    /** The string representation of the {@link Types#CLOB} constant. */
     public static final String CLOB          = "CLOB";
-    /** The string representation of the {@link java.sql.Types#DATALINK} constant. */
+    /** The string representation of the {@link Types#DATALINK} constant. */
     public static final String DATALINK      = "DATALINK";
-    /** The string representation of the {@link java.sql.Types#DATE} constant. */
+    /** The string representation of the {@link Types#DATE} constant. */
     public static final String DATE          = "DATE";
-    /** The string representation of the {@link java.sql.Types#DECIMAL} constant. */
+    /** The string representation of the {@link Types#DECIMAL} constant. */
     public static final String DECIMAL       = "DECIMAL";
-    /** The string representation of the {@link java.sql.Types#DISTINCT} constant. */
+    /** The string representation of the {@link Types#DISTINCT} constant. */
     public static final String DISTINCT      = "DISTINCT";
-    /** The string representation of the {@link java.sql.Types#DOUBLE} constant. */
+    /** The string representation of the {@link Types#DOUBLE} constant. */
     public static final String DOUBLE        = "DOUBLE";
-    /** The string representation of the {@link java.sql.Types#FLOAT} constant. */
+    /** The string representation of the {@link Types#FLOAT} constant. */
     public static final String FLOAT         = "FLOAT";
-    /** The string representation of the {@link java.sql.Types#INTEGER} constant. */
+    /** The string representation of the {@link Types#INTEGER} constant. */
     public static final String INTEGER       = "INTEGER";
-    /** The string representation of the {@link java.sql.Types#JAVA_OBJECT} constant. */
+    /** The string representation of the {@link Types#JAVA_OBJECT} constant. */
     public static final String JAVA_OBJECT   = "JAVA_OBJECT";
-    /** The string representation of the {@link java.sql.Types#LONGVARBINARY} constant. */
+    /** The string representation of the {@link Types#LONGVARBINARY} constant. */
     public static final String LONGVARBINARY = "LONGVARBINARY";
-    /** The string representation of the {@link java.sql.Types#LONGVARCHAR} constant. */
+    /** The string representation of the {@link Types#LONGVARCHAR} constant. */
     public static final String LONGVARCHAR   = "LONGVARCHAR";
-    /** The string representation of the {@link java.sql.Types#NULL} constant. */
+    /** The string representation of the {@link Types#NULL} constant. */
     public static final String NULL          = "NULL";
-    /** The string representation of the {@link java.sql.Types#NUMERIC} constant. */
+    /** The string representation of the {@link Types#NUMERIC} constant. */
     public static final String NUMERIC       = "NUMERIC";
-    /** The string representation of the {@link java.sql.Types#OTHER} constant. */
+    /** The string representation of the {@link Types#OTHER} constant. */
     public static final String OTHER         = "OTHER";
-    /** The string representation of the {@link java.sql.Types#REAL} constant. */
+    /** The string representation of the {@link Types#REAL} constant. */
     public static final String REAL          = "REAL";
-    /** The string representation of the {@link java.sql.Types#REF} constant. */
+    /** The string representation of the {@link Types#REF} constant. */
     public static final String REF           = "REF";
-    /** The string representation of the {@link java.sql.Types#SMALLINT} constant. */
+    /** The string representation of the {@link Types#SMALLINT} constant. */
     public static final String SMALLINT      = "SMALLINT";
-    /** The string representation of the {@link java.sql.Types#STRUCT} constant. */
+    /** The string representation of the {@link Types#STRUCT} constant. */
     public static final String STRUCT        = "STRUCT";
-    /** The string representation of the {@link java.sql.Types#TIME} constant. */
+    /** The string representation of the {@link Types#TIME} constant. */
     public static final String TIME          = "TIME";
-    /** The string representation of the {@link java.sql.Types#TIMESTAMP} constant. */
+    /** The string representation of the {@link Types#TIMESTAMP} constant. */
     public static final String TIMESTAMP     = "TIMESTAMP";
 
     public static final String TIMESTAMPTZ     = "TIMESTAMPTZ";
     
     public static final String TIMESTAMPLTZ     = "TIMESTAMPLTZ";
 
-    /** The string representation of the {@link java.sql.Types#TINYINT} constant. */
+    /** The string representation of the {@link Types#TINYINT} constant. */
     public static final String TINYINT       = "TINYINT";
-    /** The string representation of the {@link java.sql.Types#VARBINARY} constant. */
+    /** The string representation of the {@link Types#VARBINARY} constant. */
     public static final String VARBINARY     = "VARBINARY";
-    /** The string representation of the {@link java.sql.Types#VARCHAR} constant. */
+    /** The string representation of the {@link Types#VARCHAR} constant. */
     public static final String VARCHAR       = "VARCHAR";
 
     public static final String SQLXML = "SQLXML";
@@ -119,10 +119,10 @@ public abstract class TypeMap
     public static final String DATETIME2 = "DATETIME2";
     public static final String TSVECTOR = "TSVECTOR";
     
-    /** Maps type names to the corresponding {@link java.sql.Types} constants. */
+    /** Maps type names to the corresponding {@link Types} constants. */
     private static HashMap<String, Integer> _typeNameToTypeCode = new HashMap<String, Integer>();
 
-    /** Maps {@link java.sql.Types} type code constants to the corresponding type names. */
+    /** Maps {@link Types} type code constants to the corresponding type names. */
     private static HashMap<Integer, String> _typeCodeToTypeName = new HashMap<Integer, String>();
 
     /** Contains the types per category. */
@@ -160,6 +160,8 @@ public abstract class TypeMap
         registerJdbcType(Types.VARCHAR,       VARCHAR,       JdbcTypeCategoryEnum.TEXTUAL);
         registerJdbcType(ORACLE_TIMESTAMPTZ,  TIMESTAMPTZ,   JdbcTypeCategoryEnum.DATETIME);
         registerJdbcType(ORACLE_TIMESTAMPLTZ, TIMESTAMPLTZ,  JdbcTypeCategoryEnum.DATETIME);
+        registerJdbcType(ColumnTypes.MSSQL_DATETIMEOFFSET, "DATETIMEOFFSET",  JdbcTypeCategoryEnum.DATETIME);
+        registerJdbcType(ColumnTypes.MSSQL_NTEXT, "NTEXT",  JdbcTypeCategoryEnum.TEXTUAL);
 
         // only available in JDK 1.4 and above:
         if (PlatformUtils.supportsJava14JdbcTypes())
@@ -180,7 +182,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Returns the JDBC type code (one of the {@link java.sql.Types} constants) that
+     * Returns the JDBC type code (one of the {@link Types} constants) that
      * corresponds to the given JDBC type name.
      *
      * @param typeName The JDBC type name (case is ignored)
@@ -206,7 +208,7 @@ public abstract class TypeMap
 
     /**
      * Returns the JDBC type name that corresponds to the given type code
-     * (one of the {@link java.sql.Types} constants).
+     * (one of the {@link Types} constants).
      *
      * @param typeCode The type code
      * @return The JDBC type name (one of the constants in this class) or
@@ -224,7 +226,7 @@ public abstract class TypeMap
     /**
      * Registers a jdbc type.
      *
-     * @param typeCode The type code (one of the {@link java.sql.Types} constants)
+     * @param typeCode The type code (one of the {@link Types} constants)
      * @param typeName The type name (case is ignored)
      * @param category The type category
      */
@@ -246,7 +248,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Determines whether the given jdbc type (one of the {@link java.sql.Types} constants)
+     * Determines whether the given jdbc type (one of the {@link Types} constants)
      * is a numeric type.
      *
      * @param jdbcTypeCode The type code
@@ -260,7 +262,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Determines whether the given jdbc type (one of the {@link java.sql.Types} constants)
+     * Determines whether the given jdbc type (one of the {@link Types} constants)
      * is a date/time type.
      *
      * @param jdbcTypeCode The type code
@@ -274,7 +276,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Determines whether the given jdbc type (one of the {@link java.sql.Types} constants)
+     * Determines whether the given jdbc type (one of the {@link Types} constants)
      * is a text type.
      *
      * @param jdbcTypeCode The type code
@@ -288,7 +290,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Determines whether the given jdbc type (one of the {@link java.sql.Types} constants)
+     * Determines whether the given jdbc type (one of the {@link Types} constants)
      * is a binary type.
      *
      * @param jdbcTypeCode The type code
@@ -302,7 +304,7 @@ public abstract class TypeMap
     }
 
     /**
-     * Determines whether the given sql type (one of the {@link java.sql.Types} constants)
+     * Determines whether the given sql type (one of the {@link Types} constants)
      * is a special type.
      *
      * @param jdbcTypeCode The type code
